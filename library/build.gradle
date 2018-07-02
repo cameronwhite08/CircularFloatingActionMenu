@@ -18,8 +18,8 @@ android {
         // applicationId "com.oguzdev.circularfloatingactionmenu.library"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 201705010
-        versionName "1.0.4"
+        versionCode 20180701
+        versionName "1.1.0"
     }
     buildTypes {
         release {
@@ -35,7 +35,7 @@ publish {
     userOrg = properties.getProperty("bintray.userOrg")
     groupId = properties.getProperty("bintray.groupId")
     artifactId = 'CircularFloatingActionMenu'
-    publishVersion = '1.0.4'
+    publishVersion = '1.1.0'
     description = 'An animated circular menu for Android'
     website = properties.getProperty("bintray.website")
     bintrayUser = properties.getProperty("bintray.user")
