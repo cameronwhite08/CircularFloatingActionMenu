@@ -3,12 +3,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.8.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'
+apply plugin: 'com.github.dcendents.android-maven'
+group = "$System.env.GROUP"
 
 android {
     compileSdkVersion 25
@@ -17,8 +18,8 @@ android {
         // applicationId "com.oguzdev.circularfloatingactionmenu.library"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 20180701
-        versionName "1.1.0"
+        versionCode 20180702
+        versionName "1.1.1"
     }
     buildTypes {
         release {
@@ -26,18 +27,4 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-publish {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    userOrg = properties.getProperty("bintray.userOrg")
-    groupId = properties.getProperty("bintray.groupId")
-    artifactId = 'CircularFloatingActionMenu'
-    publishVersion = '1.1.0'
-    description = 'An animated circular menu for Android'
-    website = properties.getProperty("bintray.website")
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-    dryRun = false
 }
