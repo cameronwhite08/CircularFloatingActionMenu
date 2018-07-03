@@ -9,6 +9,8 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+// The jitpack build system defines a number of environmental vars during build
+// including GROUP which is of the form com.github.USER
 group = "$System.env.GROUP"
 
 android {
