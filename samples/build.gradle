@@ -20,6 +20,6 @@ android {
 
 dependencies {
     compile project(':library')
-    compile 'com.android.support:support-v4:25.0.1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    implementation 'com.android.support:support-v4:25.0.1'
+    implementation 'com.android.support:appcompat-v7:25.0.1'
 }

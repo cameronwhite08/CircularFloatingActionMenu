@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.annotation.SuppressLint;
 
 import com.oguzdev.circularfloatingactionmenu.library.animation.DefaultAnimationHandler;
 import com.oguzdev.circularfloatingactionmenu.library.animation.MenuAnimationHandler;
@@ -141,6 +142,7 @@ public class FloatingActionMenu {
             orientationListener = new OrientationEventListener(mainActionView.getContext(), SensorManager.SENSOR_DELAY_UI) {
                 private int lastState = -1;
 
+                @SuppressLint("WrongConstant")
                 public void onOrientationChanged(int orientation) {
 
                     Display display = getWindowManager().getDefaultDisplay();
