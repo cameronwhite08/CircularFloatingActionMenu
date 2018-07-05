@@ -21,7 +21,7 @@ allprojects {
 
 // app/build.gradle
 dependencies {
-    implementation 'com.github.jasco:CircularFloatingActionMenu:1.2.0'
+    implementation 'com.github.jasco:CircularFloatingActionMenu:1.3.0'
 }
 ```
 Alternatively, clone the repo and add `library` as a module to your project.
