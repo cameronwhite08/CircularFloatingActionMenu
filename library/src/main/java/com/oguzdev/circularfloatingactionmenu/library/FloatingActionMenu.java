@@ -226,13 +226,16 @@ public class FloatingActionMenu {
     /**
      * Closes the menu.
      * @param animated if true, this action is executed by the current {@link MenuAnimationHandler}
+     * @return boolean indicating whether request was processed rather than
+     * ignored due to animation in progress. Not dependent on opened/closed
+     * state
      */
-    public void close(boolean animated) {
+    public boolean close(boolean animated) {
         // If animations are enabled and we have a MenuAnimationHandler, let it do the heavy work
         if(animated && animationHandler != null) {
             if(animationHandler.isAnimating()) {
                 // Do not proceed if there is an animation currently going on.
-                return;
+                return false;
             }
             animationHandler.animateMenuClosing(getActionViewCenter());
         }
@@ -249,6 +252,7 @@ public class FloatingActionMenu {
         if(stateChangeListener != null) {
             stateChangeListener.onMenuClosed(this);
         }
+        return true;
     }
 
     /**
