@@ -320,7 +320,8 @@ public class FloatingActionMenu {
         else {
             Rect activityFrame = new Rect();
             getActivityContentView().getWindowVisibleDisplayFrame(activityFrame);
-            coords[0] -= (getScreenSize().x - getActivityContentView().getMeasuredWidth());
+            // horizonal inset can occur and require compensation when in reverse landscape with virtual system controls
+            coords[0] -= (activityFrame.width() + activityFrame.left - getActivityContentView().getMeasuredWidth());
             coords[1] -= (activityFrame.height() + activityFrame.top - getActivityContentView().getMeasuredHeight());
         }
         return new Point(coords[0], coords[1]);
