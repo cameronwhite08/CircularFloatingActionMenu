@@ -173,7 +173,7 @@ public class FloatingActionMenu {
      * Add custom interactions (touch/long press/click/etc) to be set to the actionView
      * @param actionView the current action view interactions will be applied to
      */
-    private void AddInteractionEvent(View actionView) {
+    public void AddInteractionEvent(View actionView) {
         // Listen click events on the main action view
         // In the future, touch and drag events could be listened to offer an alternative behaviour
         actionView.setClickable(true);
