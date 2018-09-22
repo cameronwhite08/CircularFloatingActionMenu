@@ -106,8 +106,6 @@ public class FloatingActionMenu {
 
         this.stateChangeListener = stateChangeListener;
 
-        AddInteractionEvent(this.mainActionView);
-
         // Do not forget to set the menu as self to our customizable animation handler
         if(animationHandler != null) {
             animationHandler.setMenu(this);
@@ -170,14 +168,12 @@ public class FloatingActionMenu {
     }
 
     /**
-     * Add custom interactions (touch/long press/click/etc) to be set to the actionView
-     * @param actionView the current action view interactions will be applied to
+     * Add custom interactions (touch/long press/click/etc) to the current action view
+     * @param adder a lambda expression that adds custom interactions to the current action view.
      */
-    public void AddInteractionEvent(View actionView) {
-        // Listen click events on the main action view
+    public void AddInteractionEvent(InteractionAdder<View> adder) {
         // In the future, touch and drag events could be listened to offer an alternative behaviour
-        actionView.setClickable(true);
-        actionView.setOnClickListener(new ActionViewClickListener());
+        adder.addInteraction(this.mainActionView);
     }
 
     /**
@@ -655,6 +651,13 @@ public class FloatingActionMenu {
     public static interface MenuStateChangeListener {
         public void onMenuOpened(FloatingActionMenu menu);
         public void onMenuClosed(FloatingActionMenu menu);
+    }
+
+    /**
+     * A functional interface for lamba expressions to add interactions to the actionView
+     */
+    public static interface InteractionAdder<View>{
+        void addInteraction(View v);
     }
 
     /**
