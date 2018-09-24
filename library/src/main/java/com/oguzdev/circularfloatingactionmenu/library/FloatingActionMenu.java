@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.Display;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.OrientationEventListener;
@@ -55,6 +56,8 @@ public class FloatingActionMenu {
     private MenuStateChangeListener stateChangeListener;
     /** Reference to a listener that listens click sub action button */
     private OnSubActionButtonClickListener subButtonClickListener;
+    /** Reference to a listener that listens for drag events of a sub action button */
+    private OnSubActionButtonDragListener subButtonDragListener;
     /** whether the openings and closings should be animated or not */
     private boolean animated;
     /** whether the menu is currently open or not */
@@ -143,6 +146,15 @@ public class FloatingActionMenu {
                     }
                 }
             });
+            item.view.setOnDragListener(new View.OnDragListener() {
+                @Override
+                public boolean onDrag(View view, DragEvent dragEvent) {
+                    if (subButtonDragListener != null){
+                        return subButtonDragListener.onSubButtonDrag(view, dragEvent, FloatingActionMenu.this, index);
+                    }
+                    return false;
+                }
+            });
         }
 
         if(systemOverlay) {
@@ -171,7 +183,7 @@ public class FloatingActionMenu {
      * Add custom interactions (touch/long press/click/etc) to the current action view
      * @param adder a lambda expression that adds custom interactions to the current action view.
      */
-    public void AddInteractionEvent(InteractionAdder<View> adder) {
+    public void AddInteractionEvent(InteractionAdder adder) {
         // In the future, touch and drag events could be listened to offer an alternative behaviour
         adder.addInteraction(this.mainActionView);
     }
@@ -579,6 +591,10 @@ public class FloatingActionMenu {
         this.subButtonClickListener = listener;
     }
 
+    public void setOnSubButtonDragListener(OnSubActionButtonDragListener listener) {
+        this.subButtonDragListener = listener;
+    }
+
     /**
      * A simple click listener used by the main action view
      */
@@ -656,7 +672,7 @@ public class FloatingActionMenu {
     /**
      * A functional interface for lamba expressions to add interactions to the actionView
      */
-    public static interface InteractionAdder<View>{
+    public static interface InteractionAdder{
         void addInteraction(View v);
     }
 
@@ -665,6 +681,13 @@ public class FloatingActionMenu {
      */
     public static interface OnSubActionButtonClickListener {
         public void onSubButtonClick(FloatingActionMenu menu,int index);
+    }
+
+    /**
+     * A listener to listen to drag events of sub action button
+     */
+    public static interface OnSubActionButtonDragListener {
+        public boolean onSubButtonDrag(View v, DragEvent d, FloatingActionMenu menu, int index);
     }
 
     /**
